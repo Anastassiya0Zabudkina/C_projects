@@ -1,0 +1,8 @@
+//
+// Created by Anastassiya Zabudkina on 27.05.24.
+//
+
+#ifndef BUS1HOMEWORK_DOUBLY_LINKED_LIST_H
+#define BUS1HOMEWORK_DOUBLY_LINKED_LIST_H
+
+#endif //BUS1HOMEWORK_DOUBLY_LINKED_LIST_H

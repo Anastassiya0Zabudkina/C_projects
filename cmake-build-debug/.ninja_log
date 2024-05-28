@@ -1,0 +1,11 @@
+# ninja log v5
+2	39	1716923981908664918	CMakeFiles/bus1homework.dir/1hm_dima/palindrome_dmitrii.c.o	da779e183b3ce5a7
+1	46	1716923981916120247	CMakeFiles/bus1homework.dir/1homework/pi_calculation.c.o	b4741845f5b4ebca
+1	46	1716923981915833079	CMakeFiles/bus1homework.dir/1homework/prime.c.o	8e7c8d11df0457a5
+1	39	1716923981907146452	CMakeFiles/bus1homework.dir/1homework/palindrome.c.o	f90593d31d856046
+1	41	1716923981910305593	CMakeFiles/bus1homework.dir/1homework/vigenere.c.o	482a2e276c126de3
+1	36	1716923981906154906	CMakeFiles/bus1homework.dir/1hm_dima/pi_calculation_dmitrii.c.o	169e572f810d531c
+30	62	1715515396199925463	bus1homework	c789d3bd47f25e36
+1	42	1716923981912370687	CMakeFiles/bus1homework.dir/1hm_dima/prime_dmitrii.c.o	5eb471f56ed8d67c
+2	37	1716923981906579866	CMakeFiles/bus1homework.dir/1hm_dima/vigenere_dmitrii.c.o	eb38b6028eb1f904
+2	42	1716923981912302020	CMakeFiles/bus1homework.dir/2homework/doubly_linked_list.c.o	c0b2b4f5315c526c
