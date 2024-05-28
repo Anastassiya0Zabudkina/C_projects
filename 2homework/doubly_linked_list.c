@@ -1,67 +1,105 @@
-//
-// Created by Anastassiya Zabudkina on 27.05.24.
-//
-
-#include "doubly_linked_list.h"
 #include <stdbool.h>
-#include <MacTypes.h>
+#include <stdlib.h>
 #include "scheduler.h"
 #include "doubly_linked_list.h"
 
-/**
- * \brief Checks whether a run_queue is empty
- *
- * \param rq Pointer to the run_queue
- *
- * \returns `true` iff the run_queue is empty
- */
 bool stud_rq_empty(struct run_queue const *rq) {
-    return false;
+    return (rq->head == NULL);
 }
-
-/**
- * \brief Creates a task
- *
- * \param pid   The pid of the new task
- * \param state Default state of the task
- *
- * \return A pointer to the new task, `NULL` if failed
- */
 
 struct task *stud_task_create(int pid, enum states state) {
-    return NULL;
+    struct task* new_task = (struct task*)malloc(sizeof(struct task));
+    if (new_task == NULL) {
+        return NULL;
+    }
+
+    new_task->pid = pid;
+    new_task->state = state;
+    new_task->prev = NULL;
+    new_task->next = NULL;
+    return new_task;
 }
 
-/**
- * \brief Frees/destroys a task This function assumes the task has already been
- *        removed from any run queue. It does not handle linked list operations
- *        or modifications to the run queue.
- *
- * \param task Pointer to the task to-be-destroyed
- */
 void stud_task_free(struct task *task) {
-    return;
+    free(task);
 }
 
-/**
- * \brief Frees all the elements of the `run_queue` and empties it.
- *        `rq` itself should NOT be freed. After calling this function,
- *        `rq` must simply be an empty `run_queue`.
- *
- * \param rq Pointer to the run_queue to-be-destroyed
- */
 void stud_rq_destroy(struct run_queue *rq) {
-    return;
+    if (stud_rq_empty(rq) || !rq) {
+        return;
+    }
+
+    struct task *current = rq->head;
+    while (current != NULL) {
+        struct task *next = current->next;
+        stud_task_free(current);
+        current = next;
+    }
+
+    rq->head = NULL;
+    rq->n_tasks = 0;
+    rq->time_counter = 0;
 }
 
-/**
- * \brief Tries to find a task in a run_queue by its PID
- *
- * \param rq  Pointer to the run_queue
- * \param pid PID of the wanted task
- *
- * \returns Pointer to the task, `NULL` if failed
- */
 struct task *stud_rq_find(struct run_queue *rq, int pid) {
+    struct task* current = rq->head;
+    while (current != NULL) {
+        if (current->pid == pid) {
+            return current;
+        }
+        current = current->next;
+    }
     return NULL;
+}
+
+struct task *stud_rq_head(struct run_queue *rq) {
+    return rq->head;
+}
+
+struct task *stud_rq_tail(struct run_queue *rq) {
+    struct task* current = rq->head;
+    if (current == NULL) {
+        return NULL;
+    }
+    while (current->next != NULL) {
+        current = current->next;
+    }
+    return current;
+}
+
+bool stud_rq_enqueue(struct run_queue *rq, struct task *task) {
+    if (rq->head == NULL) {
+        rq->head = task;
+    } else {
+        struct task* current = rq->head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = task;
+        task->prev = current;
+    }
+    rq->n_tasks++;
+    return true;
+}
+
+bool stud_rq_prepend(struct run_queue *rq, struct task *task) {
+    if (rq->head == NULL) {
+        rq->head = task;
+    } else {
+        task->next = rq->head;
+        rq->head->prev = task;
+        rq->head = task;
+    }
+    rq->n_tasks++;
+    return true;
+}
+
+size_t stud_rq_length(struct run_queue *rq) {
+    size_t length = 0;
+    struct task* current = rq->head;
+    while (current != NULL) {
+        length++;
+        current = current->next;
+    }
+    return length;
 }

@@ -1,7 +1,3 @@
-//
-// Created by Anastassiya Zabudkina on 27.05.24.
-//
-
 #ifndef SCHEDULER_H__
 #define SCHEDULER_H__
 
@@ -21,7 +17,7 @@ enum states {
 
 enum events {
     start = 0,
-    wait_event,
+    wait,
     wake_up,
     terminate,
     clock_tick,
